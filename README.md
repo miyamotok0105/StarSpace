@@ -51,16 +51,6 @@ labels 1..r is a single word:
 
 This file format is the same as in <a href="https://github.com/facebookresearch/fastText">fastText</a>. It assumes by default that labels are words that are prefixed by the string \_\_label\_\_, and the prefix string can be set by "-label" argument. 
 
-We also extend this file format to support real-valued weights (in both input and label space) by setting argument "-useWeight" to true (default is false). If "-useWeight" is true, we support weights by the following format
-
-    word_1:wt_1 word_2:wt_2 ... word_k:wt_k __label__1:lwt_1 ...    __label__r:lwt_r
-    
-e.g.,
-
-    dog:0.1 cat:0.5 ...
-    
-The default weight is 1 for any word / label that does not contain weights.
-
 In order to learn the embeddings, do:
 
     $./starspace train -trainFile data.txt -model modelSaveFile
@@ -127,6 +117,20 @@ We apply the model to the problem of text classification on <a href="https://git
 
     $bash examples/classification_ag_news.sh
     
+
+### [Example]TagSpace word / tag embeddings
+
+    $bash examples/classification_ag_news_tag_space.sh
+
+
+please change your tag data.
+
+```
+#tag3 , emi profits fall but online music market improving , london emi , the world #39 s third-largest music group , reported a drop in first-half profits on friday but said the beleaguered industry was rebounding as online music sales start to take off . 
+#tag4 , jboss 4 . 0 released , jboss , the self-proclaimed professional open source company , released jboss application server 4 . 0 today . the announcement follows closely behind the announcements of jbosscache 1 . 1 and the company #39 s new partnership with sleepycat software . 
+```
+
+
 ## PageSpace user / page embeddings 
 
 **Setting:** On Facebook, users can fan (follow) public pages they're interested in. When a user fans a page, the user can receive all things the page posts on Facebook. We want to learn page embeddings based on users' fanning data, and use it to recommend users new pages they might be interested to fan (follow). This setting can be generalized to other recommendation problems: for instance, embedding and recommending movies to users based on movies watched in the past; embed and recommend restaurants to users based on the restaurants checked-in by users in the past, etc.
@@ -170,7 +174,21 @@ So the first user likes sports, and the second is interested in pets in this cas
 
     ./starspace train -trainFile input.txt -model docspace -trainMode 1 -fileFormat labelDoc
     
-    
+
+### [Example]DocSpace document recommendation
+
+    $bash examples/classification_ag_news_doc_space.sh
+
+
+please change your doc data.
+
+```
+emi profits fall but online music market improving london emi<tab>the world #39 s third-largest music group<tab>reported a drop in first-half profits on friday but said the beleaguered industry was rebounding<tab>music sales start to take off . 
+jboss 4 . 0 released , jboss<tab>the self-proclaimed professional open source company , released jboss application server 4 . 0 today . the announcement follows closely behind the announcements of jbosscache 1 . 1<tab>new partnership with sleepycat software . 
+```
+
+
+
 ## GraphSpace: Link Prediction in Knowledge Bases ##
 
 **Setting:** Learning the mapping between entities and relations in <a href="http://www.freebase.com">Freebase</a>. In freebase, data comes in the format 
@@ -225,20 +243,6 @@ To run the full experiment on Wikipedia Article Search presented in [this paper]
 use <a href="https://github.com/facebookresearch/Starspace/blob/master/examples/wikipedia_article_search_full.sh">this script</a> (warning: it takes a long time to download data and train the model):
 
     $bash examples/wikipedia_article_search_full.sh
-    
-## ImageSpace: Learning Image and Label Embeddings
-
-With the most recent update, StarSpace can also be used to learn joint embeddings with images and other entities. For instance, one can use ResNet features (the last layer of a pre-trained ResNet model) to represent an image, and embed images with other entities (words, hashtags, etc.). Just like other entities in Starspace, images can be either on the input or the label side, depending on your task.
-
-Here we give an example using <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a> to illustrate how we train images with other entities (in this example, image class): we train a <a href="https://github.com/facebookresearch/ResNeXt">ResNeXt</a> model on CIFAR-10  which achieves 96.34% accuracy on test dataset, and use the last layer of ResNeXt as the features for each image. We embed 10 image classes together with image features in the same space using StarSpace. For an example image from class 1 with last layer (0.8, 0.5, ..., 1.2), we convert it to the following format:
-    
-    d1:0.8  d2:0.5   ...    d1024:1.2   __label__1
-
-After converting train and test examples of CIFAR-10 to the above format, we ran <a href="https://github.com/facebookresearch/StarSpace/blob/master/examples/image_feature_example_cifar10.sh">this example script</a>:
-
-    $bash examples/image_feature_example_cifar10.sh
-
-and achieved 96.56% accuracy on an average of 5 runs.
 
 # Full Documentation of Parameters
     
@@ -287,7 +291,6 @@ and achieved 96.56% accuracy on an average of 5 runs.
 
     The following arguments are optional:
       -normalizeText   whether to run basic text preprocess for input files [1]
-      -useWeight       whether input file contains weights [0]
       -verbose         verbosity level [0]
       -debug           whether it's in debug mode [0]
       -thread          number of threads [10]

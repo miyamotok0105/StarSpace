@@ -1,0 +1,60 @@
+Example 0:
+LHS:
+, emi profits fall but online music market improving , london emi , the world s third-largest music group , reported a drop in first-half profits on friday but said the beleaguered industry was rebounding as online music sales start to take off .  
+RHS: 
+#00 
+Predictions: 
+(++) [0.000327771]	#00 
+(--) [0.000217146]	#tag1 
+(--) [9.43944e-05]	#tag4 
+(--) [-0.000464729]	#tag2 
+(--) [-0.000628371]	#tag3 
+
+Example 1:
+LHS:
+, jboss 0 . 0 released , jboss , the self-proclaimed professional open source company , released jboss application server 0 . 0 today . the announcement follows closely behind the announcements of jbosscache 0 . 0 and the company s new partnership with sleepycat software .  
+RHS: 
+#00 
+Predictions: 
+(++) [0.00118747]	#00 
+(--) [0.000877654]	#tag1 
+(--) [-0.000507849]	#tag3 
+(--) [-0.000705036]	#tag2 
+(--) [-0.000822171]	#tag4 
+
+Example 2:
+LHS:
+, giants frustration seeps to surface as slide continues , at about the moment a melee broke out on the giants sideline sunday - after eagles linebacker jeremiah trotter hit giants quarterback eli manning out of bounds  
+RHS: 
+#00 
+Predictions: 
+(++) [0.00117684]	#00 
+(--) [0.000264009]	#tag2 
+(--) [0.000199172]	#tag1 
+(--) [-0.000502128]	#tag3 
+(--) [-0.000521325]	#tag4 
+
+Example 3:
+LHS:
+ , yankees win controversial game against devil rays , new york ( reuters ) - alex rodriguez drove in three runs and orlando hernandez pitched seven strong innings to guide the new york yankees past the tampa bay devil rays 0-0 in the american league monday .  
+RHS: 
+#tag1 
+Predictions: 
+(++) [8.67402e-05]	#tag1 
+(--) [6.71589e-05]	#tag3 
+(--) [-0.000168121]	#00 
+(--) [-0.000457513]	#tag2 
+(--) [-0.00048087]	#tag4 
+
+Example 4:
+LHS:
+ , transparent search a snap , san francisco -- a new company launched by dotcom survivor idealab aims to take a chunk out of the search market by letting users slice and dice their search results .  
+RHS: 
+#tag3 
+Predictions: 
+(--) [0.000476052]	#tag1 
+(--) [-0.000182246]	#tag4 
+(++) [-0.000192796]	#tag3 
+(--) [-0.000214958]	#00 
+(--) [-0.000954355]	#tag2 
+
