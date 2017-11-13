@@ -104,10 +104,10 @@ void foreach_line(const String& fname,
                   int numThreads = 1) {
   using namespace std;
 
-  auto filelen = [&](ifstream& f) {
-    auto pos = tellg(f);
-    f.seekg(0, ios_base::end);
-    return tellg(f);
+  auto filelen = [&](ifstream& ifs) {
+    auto pos = tellg(ifs);
+    ifs.seekg(0, ios_base::end);
+    return tellg(ifs);
   };
 
   ifstream ifs(fname);
